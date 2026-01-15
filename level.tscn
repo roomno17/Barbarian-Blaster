@@ -1,5 +1,40 @@
-[gd_scene format=3 uid="uid://0dxud7s43o0p"]
+[gd_scene load_steps=5 format=3 uid="uid://0dxud7s43o0p"]
+
+[ext_resource type="MeshLibrary" uid="uid://c0c3djgifhbb0" path="res://MeshLibraries/space_library.tres" id="1_u52ul"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5xgho"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_u52ul"]
+sky_material = SubResource("ProceduralSkyMaterial_5xgho")
+
+[sub_resource type="Environment" id="Environment_vonw3"]
+background_mode = 2
+sky = SubResource("Sky_u52ul")
+tonemap_mode = 2
+glow_enabled = true
 
 [node name="level" type="Node3D"]
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vonw3")
+
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 2, 0, 0, 0, 100, 0, -1, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 14.5, 9.5)
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_u52ul")
+cell_size = Vector3(4, 4, 4)
+cell_center_y = false
+data = {
+"cells": PackedInt32Array(65535, 65535, 1310720, 65535, 65534, 1310720, 65535, 65533, 1310720, 65534, 65533, 1310720, 65533, 65533, 1310720, 65532, 65533, 1310720, 65531, 65533, 1310720, 0, 65533, 1310720, 1, 65533, 1310720, 2, 65533, 1310720, 3, 65533, 1310720, 4, 65533, 1310720, 65535, 0, 1310720, 65535, 1, 1310720, 65535, 2, 1310720, 0, 2, 1310720, 1, 2, 1310720, 2, 2, 1310720, 3, 2, 1310720, 4, 2, 1310720, 65534, 2, 1310720, 65533, 2, 1310720, 65532, 2, 1310720, 65531, 2, 1310720, 65531, 1, 1310720, 65531, 0, 1310720, 65531, 65535, 1310720, 65531, 65534, 1310720, 65532, 65534, 1310720, 4, 65534, 1310720, 4, 65535, 1310720, 4, 0, 1310720, 4, 1, 1310720, 3, 1, 1310720, 2, 1, 1310720, 1, 1, 1310720, 0, 1, 1310720, 65534, 1, 1310720, 65533, 1, 1310720, 65532, 1, 1310720, 65532, 65535, 1310720, 65533, 65534, 1310720, 65533, 65535, 1310720, 65533, 0, 1310720, 65534, 0, 1310720, 65534, 65535, 1310720, 65534, 65534, 1310720, 65532, 0, 1310720, 0, 0, 1310720, 0, 65535, 1310720, 1, 65535, 1310720, 1, 0, 1310720, 2, 0, 1310720, 3, 0, 1310720, 3, 65535, 1310720, 2, 65535, 1310720, 2, 65534, 1310720, 1, 65534, 1310720, 0, 65534, 1310720, 3, 65534, 1310720)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
