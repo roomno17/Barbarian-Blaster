@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://0dxud7s43o0p"]
+[gd_scene load_steps=9 format=3 uid="uid://0dxud7s43o0p"]
 
 [ext_resource type="MeshLibrary" uid="uid://c0c3djgifhbb0" path="res://MeshLibraries/space_library.tres" id="1_u52ul"]
+[ext_resource type="PackedScene" uid="uid://csjdq42434llx" path="res://enemy.tscn" id="2_vonw3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5xgho"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -23,7 +24,10 @@ _data = {
 point_count = 7
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u52ul"]
-albedo_color = Color(0.5136032, 0.27712286, 0.12427782, 1)
+albedo_color = Color(0.28868848, 0.2577828, 0.22066543, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vonw3"]
+albedo_color = Color(0.10747976, 0.10747973, 0.10747973, 1)
 
 [node name="level" type="Node3D"]
 
@@ -38,7 +42,7 @@ environment = SubResource("Environment_vonw3")
 transform = Transform3D(100, 0, 0, 0, 2, 0, 0, 0, 100, 0, -1, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 14.5, 9.5)
+transform = Transform3D(1, 0, 0, 0, 0.25881904, 0.96592575, 0, -0.96592575, 0.25881904, 0, 14.5, 9.5)
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("1_u52ul")
@@ -50,11 +54,9 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="Path3D" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 curve = SubResource("Curve3D_u52ul")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="Path3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 polygon = PackedVector2Array(-1, 0, -1, 0.1, 1, 0.1, 1, 0)
 mode = 2
 path_node = NodePath("..")
@@ -68,3 +70,36 @@ path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
 material = SubResource("StandardMaterial3D_u52ul")
+
+[node name="LeftEdge" type="CSGPolygon3D" parent="Path3D"]
+polygon = PackedVector2Array(-1.1, 0, -1.1, 0.25, -0.9, 0.25, -0.9, 0)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 0.6
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("StandardMaterial3D_vonw3")
+
+[node name="RightEdge" type="CSGPolygon3D" parent="Path3D"]
+polygon = PackedVector2Array(1.1, 0, 1.1, 0.25, 0.9, 0.25, 0.9, 0)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 0.41
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("StandardMaterial3D_vonw3")
+
+[node name="Enemy" parent="Path3D" instance=ExtResource("2_vonw3")]
+transform = Transform3D(-0.023645116, 0, -0.9996838, 0, 1, 0, 0.9996838, 0, -0.023645116, -20.851744, 0, 9.936457)
