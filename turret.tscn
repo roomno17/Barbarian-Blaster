@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmd8u0vtjxxcu"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8xk5y"]
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8xk5y"]
+albedo_color = Color(0, 0.23921569, 0.45882353, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3oylf"]
+top_radius = 0.6
+bottom_radius = 0.6
+height = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_3oylf"]
+size = Vector3(0.34, 0.34, 1)
+
+[node name="Turret" type="Node3D"]
+
+[node name="TurretBase" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_8xk5y")
+surface_material_override/0 = SubResource("StandardMaterial3D_8xk5y")
+
+[node name="TurretTop" type="MeshInstance3D" parent="TurretBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("CylinderMesh_3oylf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TurretBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36230332, 0.8964834)
+mesh = SubResource("BoxMesh_3oylf")
+skeleton = NodePath("../..")
