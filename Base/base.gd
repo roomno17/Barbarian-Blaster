@@ -15,6 +15,7 @@ var health : int :
 @onready var label_3d: Label3D = $Label3D
 
 func _ready() -> void:
+	Engine.time_scale=1
 	health = max_health
 
 func take_damage() -> void:
