@@ -3,8 +3,9 @@ var direction = Vector3.FORWARD
 @export var speed = 30
 
 func _physics_process(delta: float) -> void:
+	direction.y=0
 	position+=direction*speed*delta
-
+	print(position)
 
 func _on_timer_timeout() -> void:
 	queue_free()
