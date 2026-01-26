@@ -3,6 +3,8 @@ var pro = preload("res://projectile.tscn")
 var path : Path3D
 var target: Node3D
 @export var turret_range = 10
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 func _physics_process(delta: float) -> void:
 	target = find_best_target()
 	if target !=null:
@@ -10,6 +12,7 @@ func _physics_process(delta: float) -> void:
 func _on_timer_timeout() -> void:
 	print(target)
 	if target !=null:
+		animation_player.play("shoot")
 		var new_projectile = pro.instantiate()
 		add_child(new_projectile)
 		new_projectile.global_position = global_position
