@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://duai3x7n3jwkp"]
+
+[sub_resource type="GDScript" id="GDScript_4wcil"]
+script/source = "extends Node
+@onready var timer: Timer = $Timer
+@export var spawn_time_curve : Curve
+@export var enemy_health_curve : Curve
+@export var game_length :=30
+func _ready() -> void:
+	timer.start(game_length)
+func _process(delta: float) -> void:
+	pass
+func game_progress_ratio() -> float:
+	return 1.0-(timer.time_left/game_length)
+	
+func get_spawn_time()->float:
+	return spawn_time_curve.sample(game_progress_ratio())
+func get_enemy_health()->float:
+	return enemy_health_curve.sample(game_progress_ratio())
+"
+
+[sub_resource type="Curve" id="Curve_4wcil"]
+_limits = [0.25, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, -1.5770669, 0, 0, Vector2(1, 0.25), -1.9413538, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_0d281"]
+_limits = [10.0, 150.0, 0.0, 1.0]
+_data = [Vector2(0, 10), 0.0, 101.69454, 0, 0, Vector2(1, 150), 140.0, 0.0, 1, 0]
+point_count = 2
+
+[node name="Difficulty_Manager" type="Node"]
+script = SubResource("GDScript_4wcil")
+spawn_time_curve = SubResource("Curve_4wcil")
+enemy_health_curve = SubResource("Curve_0d281")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
