@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://fnpxq8jjvovk"]
+
+[sub_resource type="GDScript" id="GDScript_j5vpr"]
+script/source = "extends CanvasLayer
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_xjg0i"]
+line_spacing = 64.0
+font_size = 64
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1363359147]
+visible = false
+script = SubResource("GDScript_j5vpr")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=420288101]
+offset_right = 1164.0
+offset_bottom = 657.0
+color = Color(0, 0, 0, 0.2509804)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1047458534]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -200.0
+offset_right = 175.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=329207102]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=308490396]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1446631587]
+layout_mode = 2
+text = "Victory"
+label_settings = SubResource("LabelSettings_xjg0i")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=212783385]
+layout_mode = 2
+
+[node name="retry" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=611724158]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Retry"
+
+[node name="quit" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=262869119]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Quit"

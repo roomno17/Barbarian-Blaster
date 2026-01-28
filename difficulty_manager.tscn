@@ -2,26 +2,33 @@
 
 [sub_resource type="GDScript" id="GDScript_4wcil"]
 script/source = "extends Node
-@onready var timer: Timer = $Timer
+
+@export var game_length := 30.0
 @export var spawn_time_curve : Curve
 @export var enemy_health_curve : Curve
-@export var game_length :=30
-signal stop_spawning
+@onready var timer: Timer = $Timer
+
+signal stop_spawning_enemies
+
 func _ready() -> void:
 	timer.start(game_length)
+	Engine.time_scale = 5
+	
 func _process(delta: float) -> void:
 	pass
+
 func game_progress_ratio() -> float:
-	return 1.0-(timer.time_left/game_length)
-	
-func get_spawn_time()->float:
+	return 1.0 - (timer.time_left / game_length)
+
+func get_spawn_time() -> float:
 	return spawn_time_curve.sample(game_progress_ratio())
-func get_enemy_health()->float:
+	
+func get_enemy_health() -> float:
 	return enemy_health_curve.sample(game_progress_ratio())
 
 
 func _on_timer_timeout() -> void:
-	stop_spawning.emit()
+	stop_spawning_enemies.emit()
 "
 
 [sub_resource type="Curve" id="Curve_4wcil"]
