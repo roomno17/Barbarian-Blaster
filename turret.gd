@@ -4,19 +4,20 @@ var path : Path3D
 var target: Node3D
 @export var turret_range = 10
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var turret_base: Node3D = $TurretBase
+@onready var cannon: Node3D = $TurretBase/TurretTop/Cannon
 
 func _physics_process(delta: float) -> void:
 	target = find_best_target()
 	if target !=null:
-		look_at(target.global_position,Vector3.UP,true)
+		turret_base.look_at(target.global_position,Vector3.UP,true)
 func _on_timer_timeout() -> void:
-	print(target)
 	if target !=null:
 		animation_player.play("shoot")
 		var new_projectile = pro.instantiate()
 		add_child(new_projectile)
-		new_projectile.global_position = global_position
-		new_projectile.direction = global_transform.basis.z
+		new_projectile.global_position = cannon.global_position
+		new_projectile.direction = cannon.global_transform.basis.z
 func find_best_target()->PathFollow3D:
 	var far = 0
 	var best = null

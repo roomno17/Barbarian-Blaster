@@ -22,6 +22,7 @@ func victory():
 	if base.health == base.max_health:
 		star_2.modulate=Color.WHITE
 		health.visible=true
+	print(bank.gold)
 	if bank.gold > 500:
 		star_3.modulate = Color.WHITE
 		money.visible=true
@@ -89,7 +90,7 @@ stretch_mode = 5
 
 [node name="star3" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/StarContainer" unique_id=1827863051]
 unique_name_in_owner = true
-self_modulate = Color(0.15775332, 0.15775332, 0.15775332, 1)
+modulate = Color(0.15775332, 0.15775332, 0.15775332, 1)
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture = ExtResource("1_12kce")
@@ -106,10 +107,12 @@ layout_mode = 2
 text = "Survived+1"
 
 [node name="health" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=600331889]
+visible = false
 layout_mode = 2
 text = "Full Health+1"
 
 [node name="money" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=124696914]
+visible = false
 layout_mode = 2
 text = "Extra Money+1"
 
