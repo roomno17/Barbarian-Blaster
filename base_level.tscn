@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dmd8u0vtjxxcu" path="res://turret.tscn" id="6_2elnx"]
 [ext_resource type="Script" uid="uid://brmiqfbffbybp" path="res://bank.gd" id="8_bkkah"]
 [ext_resource type="PackedScene" uid="uid://duai3x7n3jwkp" path="res://difficulty_manager.tscn" id="9_xjg0i"]
+[ext_resource type="PackedScene" uid="uid://fnpxq8jjvovk" path="res://victory_layer.tscn" id="10_ykwpl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4sal3"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -44,10 +45,6 @@ font_size = 64
 outline_size = 16
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_xjg0i"]
-line_spacing = 64.0
-font_size = 64
-
 [node name="BaseLevel" type="Node3D" unique_id=2052885382]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1543278879]
@@ -76,9 +73,10 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="Path3D" type="Path3D" parent="." unique_id=244187357 node_paths=PackedStringArray("difficulty_manager")]
+[node name="Path3D" type="Path3D" parent="." unique_id=244187357 node_paths=PackedStringArray("victory_layer", "difficulty_manager")]
 curve = SubResource("Curve3D_bo3yr")
 script = ExtResource("3_u2wky")
+victory_layer = NodePath("../CanvasLayer")
 enemy_scene = ExtResource("2_5vx1e")
 difficulty_manager = NodePath("../Difficulty_Manager")
 
@@ -155,51 +153,8 @@ label_settings = SubResource("LabelSettings_2elnx")
 
 [node name="Difficulty_Manager" parent="." unique_id=55959099 instance=ExtResource("9_xjg0i")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=708781460]
+[node name="CanvasLayer" parent="." unique_id=1363359147 instance=ExtResource("10_ykwpl")]
 visible = false
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1255685276]
-offset_right = 1164.0
-offset_bottom = 657.0
-color = Color(0, 0, 0, 0.2509804)
-
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=934223535]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -175.0
-offset_top = -200.0
-offset_right = 175.0
-offset_bottom = 200.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/CenterContainer" unique_id=123602961]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer/PanelContainer" unique_id=1020240941]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/PanelContainer/VBoxContainer" unique_id=1197993843]
-layout_mode = 2
-text = "Victory"
-label_settings = SubResource("LabelSettings_xjg0i")
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CenterContainer/PanelContainer/VBoxContainer" unique_id=740580639]
-layout_mode = 2
-
-[node name="retry" type="Button" parent="CanvasLayer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=602585022]
-layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "Retry"
-
-[node name="quit" type="Button" parent="CanvasLayer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=2016366765]
-layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "Quit"
 
 [connection signal="timeout" from="Path3D/Timer" to="Path3D" method="_on_timer_timeout"]
 [connection signal="stop_spawning_enemies" from="Difficulty_Manager" to="Path3D" method="_on_difficulty_manager_stop_spawning_enemies"]

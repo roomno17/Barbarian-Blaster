@@ -1,15 +1,40 @@
 [gd_scene format=3 uid="uid://fnpxq8jjvovk"]
 
+[ext_resource type="Texture2D" uid="uid://dvkq2o8rrv4hb" path="res://assets/star.png" id="1_12kce"]
+
 [sub_resource type="GDScript" id="GDScript_j5vpr"]
 script/source = "extends CanvasLayer
+@onready var star_2: TextureRect = %star2
+@onready var star_3: TextureRect = %star3
+@onready var survived: Label = $CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/survived
+@onready var health: Label = $CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/health
+@onready var money: Label = $CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/money
+
+
+@onready var base:= get_tree().get_first_node_in_group(\"base\")
+@onready var bank := get_tree().get_first_node_in_group(\"bank\")
+
+func _on_retry_pressed() -> void:
+	get_tree().reload_current_scene()
+	
+func victory():
+	visible = true
+	if base.health == base.max_health:
+		star_2.modulate=Color.WHITE
+		health.visible=true
+	if bank.gold > 500:
+		star_3.modulate = Color.WHITE
+		money.visible=true
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_xjg0i"]
-line_spacing = 64.0
-font_size = 64
+line_spacing = 90.0
+font_size = 90
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1363359147]
-visible = false
 script = SubResource("GDScript_j5vpr")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=420288101]
@@ -31,6 +56,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=329207102]
+custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=308490396]
@@ -42,15 +68,67 @@ text = "Victory"
 label_settings = SubResource("LabelSettings_xjg0i")
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=212783385]
+[node name="StarContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1215653558]
 layout_mode = 2
 
+[node name="star1" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/StarContainer" unique_id=1278459258]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("1_12kce")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="star2" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/StarContainer" unique_id=547927126]
+unique_name_in_owner = true
+modulate = Color(0.15686275, 0.15686275, 0.15686275, 1)
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("1_12kce")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="star3" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/StarContainer" unique_id=1827863051]
+unique_name_in_owner = true
+self_modulate = Color(0.15775332, 0.15775332, 0.15775332, 1)
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("1_12kce")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=536313104]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="survived" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=551611626]
+layout_mode = 2
+text = "Survived+1"
+
+[node name="health" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=600331889]
+layout_mode = 2
+text = "Full Health+1"
+
+[node name="money" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=124696914]
+layout_mode = 2
+text = "Extra Money+1"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=212783385]
+layout_mode = 2
+size_flags_vertical = 10
+alignment = 1
+
 [node name="retry" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=611724158]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Retry"
 
 [node name="quit" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=262869119]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Quit"
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/quit" to="." method="_on_quit_pressed"]
