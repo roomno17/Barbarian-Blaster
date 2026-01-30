@@ -37,7 +37,7 @@ point_count = 2
 
 [sub_resource type="Curve" id="Curve_0d281"]
 _limits = [10.0, 150.0, 0.0, 1.0]
-_data = [Vector2(0, 10), 0.0, 101.69454, 0, 0, Vector2(1, 150), 140.0, 0.0, 1, 0]
+_data = [Vector2(0, 10), 0.0, 101.69454, 0, 0, Vector2(0.9830508, 109.594025), 101.311165, 0.0, 1, 0]
 point_count = 2
 
 [node name="Difficulty_Manager" type="Node" unique_id=1935097586]

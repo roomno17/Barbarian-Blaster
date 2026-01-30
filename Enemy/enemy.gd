@@ -5,7 +5,8 @@ class_name Enemy
 @onready var bank: MarginContainer = get_tree().get_first_node_in_group("bank")
 @export var speed :float = 10.0
 @export var max_health = 50
-@export var loot = 50
+@export var loot = 75
+
 var health:int:
 	set(new_health):
 		if health>new_health:
